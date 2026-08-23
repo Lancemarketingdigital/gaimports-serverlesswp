@@ -1,0 +1,692 @@
+/* ==========================================================================
+   FAST WEBX - CARDS E LAYOUTS DE LOOPS
+   Contém todos os estilos CSS para listagens de posts e layouts de cards (A a F e Portal).
+   Carregado dinamicamente para otimização extrema de performance.
+   ========================================================================== */
+
+
+
+/* Layout A: Lista Simples */
+.fwx-grid-layout-a {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+/* Sem sidebar: layouts A e E expandem para o container completo */
+/* Com sidebar: também removem max-width para preencher a coluna de conteúdo */
+.fwx-archive-layout.no-sidebar .fwx-grid-layout-a,
+.fwx-archive-layout.no-sidebar .fwx-grid-layout-e,
+.fwx-archive-layout.has-sidebar .fwx-grid-layout-a,
+.fwx-archive-layout.has-sidebar .fwx-grid-layout-e {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* Layout C com sidebar: força 3 colunas para manter identidade visual única vs Layout D */
+.fwx-archive-layout.has-sidebar .fwx-grid-layout-c {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 992px) {
+    .fwx-archive-layout.has-sidebar .fwx-grid-layout-c {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+}
+
+/* Featured do C com sidebar: destaque ocupa linha inteira, inner em 2 colunas */
+.fwx-archive-layout.has-sidebar .fwx-grid-layout-c .fwx-post-featured {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* Somente para titulos dentro do layout c em 3 colunas, tavam grandes*/
+.fwx-archive-layout .fwx-grid-layout-c h2.entry-title a {
+    font-size: 1.2rem;
+}
+
+
+
+/* Layout C: Híbrido (Primeiro em destaque) */
+.fwx-grid-layout-c {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
+
+.fwx-grid-layout-c .fwx-post-featured {
+    grid-column: 1 / -1;
+    /* Ocupa a linha inteira */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    align-items: stretch;
+}
+
+@media screen and (max-width: 600px) {
+    .fwx-grid-layout-c .fwx-post-featured {
+        gap: 0px;
+    }
+}
+
+/* Featured posts (destaque) nos layouts C e D: thumb preenche 100% da altura */
+.fwx-post-featured .fwx-post-thumb {
+    height: 100%;
+}
+
+.fwx-post-featured .fwx-post-thumb a {
+    display: block;
+    height: 100%;
+}
+
+.fwx-post-featured .fwx-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: auto;
+    border-radius: 12px 0 0 12px;
+}
+
+/*border radius para mobile*/
+@media screen and (max-width: 600px) {
+    .fwx-post-featured .fwx-post-thumb img {
+        border-radius: 0;
+    }
+}
+
+/* Layout D: Destaque + 2 Colunas */
+.fwx-grid-layout-d {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.fwx-grid-layout-d .fwx-post-featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 30px;
+    align-items: stretch;
+}
+
+/*abaixo para remover gap do desk no mobile*/
+@media screen and (max-width: 600px) {
+    .fwx-grid-layout-d .fwx-post-featured {
+        gap: 0px;
+    }
+}
+
+.fwx-post-item {
+    border: var(--fwx-border);
+    border-radius: var(--fwx-rad-12);
+    overflow: hidden;
+    background: #fdfdfd;
+    transition: var(--fwx-transition);
+}
+
+.fwx-post-item:hover {
+    transform: translateY(-5px);
+    /*18/06*/
+    box-shadow: 12px 15px 20px -12px rgba(0, 0, 0, 0.08);
+}
+
+html[data-theme="dark"] .fwx-post-item {
+    border: var(--fwx-border-dark);
+    background-color: var(--fwx-bg-color-dark);
+}
+
+/*18/06*/
+/*.fwx-grid-layout-d .fwx-post-item {
+    border: var(--fwx-border);
+    background: var(--fwx-bg-color);
+    border-radius: var(--fwx-rad-8);
+    overflow: hidden;
+}*/
+
+/*18/06*/
+/*html[data-theme='dark'] .fwx-grid-layout-d .fwx-post-item {
+    border-color: var(--fwx-borderc-dark);
+    background: rgba(255, 255, 255, 0.02);
+}*/
+
+@media (max-width: 768px) {
+
+    .fwx-grid-layout-d,
+    .fwx-grid-layout-d .fwx-post-featured {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Layout E: Lista com Thumbs Grandes (Estilo Editorial) */
+.fwx-grid-layout-e {
+    grid-template-columns: 1fr;
+    max-width: 900px;
+    margin: 40px auto;
+}
+
+.fwx-grid-layout-e .fwx-post-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    /*18/09 background: var(--fwx-bg-color);*/
+    /*border: var(--fwx-border);*/
+    /*border-radius: var(--fwx-rad-12);*/
+    /*zerei margem pra ficar igual aos outros*/
+    margin-bottom: 0px;
+    /*overflow: hidden;*/
+}
+
+/*18/06*/
+/*html[data-theme='dark'] .fwx-grid-layout-e .fwx-post-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--fwx-borderc-dark);
+}*/
+
+.fwx-grid-layout-e .fwx-post-thumb {
+    width: 42%;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.fwx-grid-layout-e .fwx-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    /* O container já tem radius */
+}
+
+.fwx-grid-layout-e .fwx-post-content {
+    width: 58%;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 768px) {
+    .fwx-grid-layout-e .fwx-post-item {
+        flex-direction: column;
+    }
+
+    .fwx-grid-layout-e .fwx-post-thumb,
+    .fwx-grid-layout-e .fwx-post-content {
+        width: 100%;
+    }
+
+    .fwx-grid-layout-e .fwx-post-thumb {
+        height: 250px;
+    }
+
+    .fwx-grid-layout-e .fwx-post-content {
+        padding: 20px;
+    }
+}
+
+/* --- Paginação (AJAX Load More) --- */
+.fwx-load-more-wrapper {
+    text-align: center;
+    margin: 50px 0 20px;
+    grid-column: 1 / -1;
+}
+
+/*.fwx-btn-load-more {
+    background: var(--fwx-primary);
+    color: var(--fwx-cat-text-color, #ffffff);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;*/
+/*font-weight: 700;*/
+/*border-radius: var(--fwx-rad-8);
+    cursor: pointer;
+    transition: var(--fwx-transition);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+*/
+
+.fwx-btn-load-more:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/*.fwx-btn-load-more:hover:not(:disabled) {
+    background: var(--fwx-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}*/
+
+
+/* --- Layout Portal (Arquivos & Home) --- */
+.fwx-grid-layout-portal {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.fwx-portal-featured {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: center;
+}
+
+.fwx-portal-compact {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important;
+    border-radius: 0 !important;
+    padding: 15px 0 !important;
+    margin-bottom: 0 !important;
+    box-shadow: none !important;
+}
+
+html[data-theme='dark'] .fwx-portal-compact {
+    border-bottom-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.fwx-portal-compact:hover {
+    transform: none !important;
+}
+
+.fwx-portal-compact .entry-title {
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+.fwx-portal-compact .fwx-post-content {
+    padding: 0;
+}
+
+@media (max-width: 992px) {
+    .fwx-portal-featured {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .fwx-grid-layout-portal {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Layout Notícias (News Style) - Layout F --- */
+.fwx-news-hero-section {
+    margin-bottom: 40px;
+    /*18/06*/
+    padding-top: 0px;
+}
+
+.fwx-news-hero-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(100px, auto);
+    gap: 15px;
+    /*18/06*/
+    /*padding: 0 20px;*/
+}
+
+.fwx-news-hero-grid .fwx-post-item {
+    position: relative;
+    margin-bottom: 0;
+    /*18/06 overflow: hidden;*/
+}
+
+/* Hero News Grid (Topo 1-4) */
+.fwx-news-hero-main {
+    grid-column: 1 / span 2;
+    grid-row: 1 / span 2;
+    height: 515px;
+}
+
+.fwx-news-hero-medium {
+    grid-column: 3 / span 2;
+    grid-row: 1;
+    height: 250px;
+}
+
+.fwx-news-hero-small {
+    grid-column: span 1;
+    grid-row: 2;
+    height: 250px;
+}
+
+.fwx-news-hero-main .fwx-post-thumb,
+.fwx-news-hero-medium .fwx-post-thumb,
+.fwx-news-hero-small .fwx-post-thumb {
+    height: 100%;
+    margin-bottom: 0;
+}
+
+.fwx-news-hero-main img,
+.fwx-news-hero-medium img,
+.fwx-news-hero-small img {
+    height: 100% !important;
+    object-fit: cover !important;
+    width: 100% !important;
+    display: block;
+}
+
+.fwx-news-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 20px 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+    color: #fff;
+    z-index: 2;
+}
+
+.fwx-news-overlay .fwx-cat-label {
+    background: var(--fwx-primary);
+    color: var(--fwx-cat-text-color, #ffffff);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: var(--fwx-rad-4);
+    margin-bottom: 10px;
+    display: inline-block;
+    text-transform: uppercase;
+    /*font-weight: 700;*/
+}
+
+.fwx-news-overlay .entry-title {
+    margin: 0;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    /*font-weight: 700;*/
+}
+
+.fwx-news-hero-main .fwx-news-overlay .entry-title {
+    font-size: 1.9rem;
+}
+
+.fwx-news-overlay a,
+.fwx-news-overlay .entry-title a {
+    color: #fff !important;
+}
+
+.fwx-news-overlay a:hover,
+.fwx-news-overlay .entry-title a:hover {
+    color: #fff !important;
+}
+
+/* Garante que o container de notícias abaixo do hero não seja grid mas mantenha o nome da classe para consistência */
+.fwx-grid-layout-f {
+    display: block !important;
+}
+
+/* Bloco Misto de Notícias (Posts 5-9) */
+.fwx-news-mixed-block {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    /*18/06*/
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.fwx-news-block-main .fwx-post-thumb {
+    width: 100%;
+    aspect-ratio: 3/2;
+    height: auto;
+    margin-bottom: 0px;
+    overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    line-height: 0;
+}
+
+.fwx-news-block-main .fwx-post-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.fwx-news-block-main .fwx-post-thumb img {
+    height: 100% !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 0;
+    display: block;
+}
+
+.fwx-news-block-main .entry-title {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+    line-height: 1.2;
+    /*font-weight: 700;*/
+}
+
+/* Lista Lateral do Bloco Misto (Posts 6-9) - Técnica idêntica ao Layout E */
+.fwx-news-block-side-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.fwx-news-block-side-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    /*background: var(--fwx-bg-color);*/
+    /*border: var(--fwx-border);*/
+    border-radius: var(--fwx-rad-8);
+    /*overflow: hidden;*/
+    margin-bottom: 0;
+}
+
+/*18/06*/
+/*html[data-theme='dark'] .fwx-news-block-side-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--fwx-borderc-dark);
+}*/
+
+.fwx-news-block-side-item .fwx-post-thumb {
+    width: 38%;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.fwx-news-block-side-item .fwx-post-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.fwx-news-block-side-item .fwx-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+.fwx-news-block-side-item .fwx-post-content {
+    /*18/06*/
+    padding: 12px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fwx-news-block-side-item .entry-title {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    margin: 0;
+}
+
+.fwx-news-block-side-item .fwx-cat-label {
+    font-size: 10px;
+    padding: 2px 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+/* News List Items (Post 10+ - Técnica idêntica ao Layout E) */
+.fwx-news-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    /*background: var(--fwx-bg-color);*/
+    /*border: var(--fwx-border);*/
+    /*border-radius: var(--fwx-rad-12);*/
+    margin-bottom: 25px;
+    /*overflow: hidden;*/
+}
+
+/*18/06*/
+/*html[data-theme='dark'] .fwx-news-list-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--fwx-borderc-dark);
+}*/
+
+.fwx-news-list-item .fwx-post-thumb {
+    width: 35%;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.fwx-news-list-item .fwx-post-thumb a {
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.fwx-news-list-item .fwx-post-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+}
+
+.fwx-news-list-item .fwx-post-content {
+    padding: 20px 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.fwx-news-list-item .entry-title {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    line-height: 1.25;
+}
+
+.fwx-news-list-item .entry-summary {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+html[data-theme='dark'] .fwx-news-list-item .entry-summary {
+    color: #bbb;
+}
+
+@media (max-width: 992px) {
+    .fwx-news-hero-section {
+        overflow: hidden;
+    }
+
+    .fwx-news-hero-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: auto;
+        /*18/06*/
+        /*padding: 0;*/
+    }
+
+    .fwx-news-hero-main {
+        grid-column: 1 / -1;
+        grid-row: auto;
+        aspect-ratio: 3/2;
+        height: auto;
+    }
+
+    .fwx-news-hero-medium {
+        grid-column: auto;
+        grid-row: auto;
+        aspect-ratio: 3/2;
+        height: auto;
+    }
+
+    .fwx-news-hero-small {
+        grid-column: auto;
+        grid-row: auto;
+        aspect-ratio: 3/2;
+        height: auto;
+    }
+
+    /* Título do destaque menor em tablet */
+    .fwx-news-hero-main .fwx-news-overlay .entry-title {
+        font-size: 1.3rem;
+    }
+
+    .fwx-news-mixed-block {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Em tablet, list-item vira coluna com imagem no topo */
+    .fwx-news-list-item {
+        flex-direction: column;
+    }
+
+    .fwx-news-list-item .fwx-post-thumb {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+
+    /* Hero colapsa para 1 coluna totalmente empilhado */
+    .fwx-news-hero-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: auto;
+    }
+
+    /* Reseta TODOS os posicionamentos explícitos do desktop */
+    .fwx-news-hero-main,
+    .fwx-news-hero-medium,
+    .fwx-news-hero-small {
+        grid-column: 1 / -1;
+        grid-row: auto;
+    }
+
+    .fwx-news-hero-main {
+        aspect-ratio: 3/2;
+        height: auto;
+    }
+
+    .fwx-news-hero-medium,
+    .fwx-news-hero-small {
+        aspect-ratio: 3/2;
+        height: auto;
+    }
+
+    /* Título do post 1 igual aos outros em mobile */
+    .fwx-news-hero-main .fwx-news-overlay .entry-title {
+        font-size: 1.2rem;
+    }
+
+    /* Posts 6-9: mantém a tecnica de width% do Layout E */
+    .fwx-news-block-side-item .fwx-post-thumb {
+        width: 35%;
+    }
+
+    /* List items continuam em coluna */
+    .fwx-news-list-item {
+        flex-direction: column;
+    }
+
+    .fwx-news-list-item .fwx-post-thumb {
+        width: 100%;
+        height: 100%;
+    }
+}

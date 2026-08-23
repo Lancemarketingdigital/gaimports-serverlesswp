@@ -1,0 +1,88 @@
+/*
+=============================================================================
+   TEMA FAST WEBX - PAGINA CSS (TEMPLATES DE PÁGINAS SINGULARES)
+=============================================================================
+   Este arquivo contém os estilos específicos para as páginas estáticas (page.php)
+   e seus respectivos modelos de página personalizados (Wide e Full Width).
+   
+   Apenas carregado quando a página atual é do tipo "page" e não usa os templates
+   Blank Page ou Home Landing Page.
+   
+   PLURALIDADE DE TEMPLATES DE PÁGINAS E COMPORTAMENTOS CONDICIONAIS:
+   
+   1. MODELO PADRÃO (Default):
+      - Carrega a estrutura padrão de posts/páginas com sidebar opcional.
+      - Controle de Sidebar: fwx_get_option('sidebar_pages') ativa/desativa a barra lateral.
+      - Título, Cabeçalho e Rodapé: Podem ser ocultados individualmente via PHP condicional
+        (não por display:none em CSS), mantendo o DOM limpo de acordo com as regras de SEO.
+      - TOC de Página: Se "_fwx_enable_page_toc" estiver ativado na edição, o sumário H2 será gerado.
+   
+   2. PÁGINA LARGA (SEM SIDEBAR - template-wide.php):
+      - Utiliza a classe `.fwx-page-wide-content` (definida neste arquivo).
+      - Remove completamente a sidebar do DOM (PHP nativo) e centraliza o container em 1200px.
+   
+   3. PÁGINA FULL WIDTH (LARGURA TOTAL - template-full-width.php):
+      - Utiliza a classe `.fwx-page-full-width` e `.fwx-full-width-content` (neste arquivo).
+      - Estende o conteúdo a 100% da viewport, com paddings zerados para builders como Gutenberg/Elementor.
+   
+   4. BLANK PAGE (CANVAS 100% - template-blank.php):
+      - Ignora completamente este arquivo e todo o CSS/JS do tema via fast_webx_blank_template_cleaner().
+   
+   5. HOME LANDING PAGE (template-home.php):
+      - Ignora este arquivo e carrega exclusivamente o home.css.
+=============================================================================
+*/
+
+/* --- Template de Página Larga --- */
+.fwx-page-wide-content {
+    max-width: 1200px;
+    margin: 40px auto;
+}
+
+.fwx-page-wide-content .entry-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.fwx-page-wide-content .entry-title {
+    font-size: 3rem;
+}
+
+/* --- Página Full Width Template --- */
+.fwx-page-full-width {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.fwx-page-full-width .entry-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Zerar margens e espaçamentos do primeiro e do último elemento do editor (Gutenberg/Elementor) */
+.fwx-page-full-width .entry-content>*:first-child {
+    margin-top: 0 !important;
+}
+
+.fwx-page-full-width .entry-content>*:last-child {
+    margin-bottom: 0 !important;
+}
+
+.fwx-full-width-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* Alinhamento do cabeçalho de título (se ativado) no grid padrão do tema */
+.fwx-full-width-content .entry-header.fwx-container {
+    margin-top: 30px;
+    margin-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
