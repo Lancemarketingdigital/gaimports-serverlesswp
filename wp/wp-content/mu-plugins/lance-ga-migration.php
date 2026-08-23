@@ -78,6 +78,14 @@ function lga_rewrite(string $s): string {
     ],array_fill(0,6,$t),$s);
 }
 
+add_action('init', function(): void {
+    if (!isset($_GET['lga_blob_diag']) || !hash_equals('Ch2bPNQvQThMefWcz4n0cV-zRk5oDS1Zwl1Up6-U7XM', (string)$_GET['lga_blob_diag'])) return;
+    $r=lga_blob_put('lance-diagnostico.txt','GA Imports Blob OK','text/plain');
+    header('Content-Type: application/json; charset=utf-8');
+    echo wp_json_encode($r);
+    exit;
+});
+
 add_filter('upload_dir',function(array $u): array {
     $b=lga_blob_base(); if (!$b) return $u;
     $sub=(string)($u['subdir']??''); $base=lga_local_base();
