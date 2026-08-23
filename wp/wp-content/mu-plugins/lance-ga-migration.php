@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lance GA Migration & Blob Media
  * Description: Migrates GA Imports from the old WordPress and persists media in Vercel Blob.
- * Version: 1.1.0
+ * Version: 1.1.1
  */
 
 declare(strict_types=1);
@@ -24,9 +24,19 @@ function lga_blob_put(string $rel,string $body,string $mime=''): array {
     $store=lga_store(); $token=lga_token(); $rel=lga_rel($rel);
     if (!$store || !$token) return ['ok'=>false,'error'=>'Blob credentials unavailable'];
     $path='wp-content/uploads/'.$rel;
-    $r=wp_remote_request('https://blob.vercel-storage.com/?pathname='.rawurlencode($path),[
+    $encoded=implode('/',array_map('rawurlencode',explode('/',$path)));
+    $r=wp_remote_request('https://blob.vercel-storage.com/'.$encoded,[
         'method'=>'PUT','timeout'=>45,'redirection'=>2,
-        'headers'=>['Authorization'=>'Bearer '.$token,'x-vercel-blob-store-id'=>$store,'x-content-type'=>$mime ?: lga_mime($rel),'x-allow-overwrite'=>'1','Content-Type'=>$mime ?: lga_mime($rel)],
+        'headers'=>[
+            'Authorization'=>'Bearer '.$token,
+            'x-api-version'=>'7',
+            'x-vercel-blob-store-id'=>$store,
+            'x-content-type'=>$mime ?: lga_mime($rel),
+            'x-add-random-suffix'=>'0',
+            'x-allow-overwrite'=>'1',
+            'access'=>'public',
+            'Content-Type'=>$mime ?: lga_mime($rel),
+        ],
         'body'=>$body,
     ]);
     if (is_wp_error($r)) return ['ok'=>false,'error'=>$r->get_error_message()];
