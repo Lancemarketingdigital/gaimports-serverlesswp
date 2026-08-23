@@ -329,11 +329,23 @@ class Wpvivid_BackupUploader
 
                 add_filter('upload_dir', array($this, 'upload_dir'));
 
+                // ServerlessWP/Vercel compatibility: preserve PHP's original temp upload path as fallback.
+                $serverlesswp_tmp_file = isset($_FILES['async-upload']['tmp_name']) ? $_FILES['async-upload']['tmp_name'] : '';
                 $status = wp_handle_upload($_FILES['async-upload'],$options);
 
                 remove_filter('upload_dir', array($this, 'upload_dir'));
 
-                $in = @fopen($status['file'], "rb");
+                $source_file = '';
+                if (is_array($status) && !empty($status['file']))
+                {
+                    $source_file = $status['file'];
+                }
+                elseif (!empty($serverlesswp_tmp_file))
+                {
+                    $source_file = $serverlesswp_tmp_file;
+                }
+
+                $in = !empty($source_file) ? @fopen($source_file, "rb") : false;
 
                 if ($in)
                 {
@@ -342,14 +354,18 @@ class Wpvivid_BackupUploader
                 }
                 else
                 {
-                    echo wp_json_encode(array('result'=>'failed','error'=>"Failed to open tmp file.path:".$status['file']));
+                    $failed_path = (is_array($status) && isset($status['file'])) ? $status['file'] : $serverlesswp_tmp_file;
+                    echo wp_json_encode(array('result'=>'failed','error'=>"Failed to open tmp file.path:".$failed_path));
                     die();
                 }
 
                 @fclose($in);
                 @fclose($out);
 
-                @wp_delete_file($status['file']);
+                if (is_array($status) && !empty($status['file']) && $status['file'] !== $serverlesswp_tmp_file)
+                {
+                    @wp_delete_file($status['file']);
+                }
             }
             else
             {
