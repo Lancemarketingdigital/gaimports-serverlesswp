@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lance GA Migration & Blob Media
  * Description: Migrates GA Imports from the old WordPress and persists media in Vercel Blob.
- * Version: 1.2.0
+ * Version: 1.2.1
  */
 
 declare(strict_types=1);
@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) exit;
 
 function lga_store(): string { return (string)(getenv('MEDIA_BLOB_STORE_ID') ?: getenv('SERVERLESSWP_STREAM_VERCEL_STORE_ID') ?: ''); }
 function lga_token(): string { return (string)(getenv('MEDIA_BLOB_READ_WRITE_TOKEN') ?: getenv('SERVERLESSWP_STREAM_VERCEL_TOKEN') ?: ''); }
-function lga_blob_base(): string { $s=lga_store(); return $s ? "https://{$s}.public.blob.vercel-storage.com" : ''; }
+function lga_blob_base(): string { $s=strtolower((string)preg_replace('/^store_/i','',lga_store())); return $s ? "https://{$s}.public.blob.vercel-storage.com" : ''; }
 function lga_local_base(): string { return '/tmp/gaimports-wordpress-uploads'; }
 function lga_source_base(): string { return 'https://cms.gaimportsbrasil.com.br'; }
 function lga_rel(string $p): string { return ltrim(str_replace('\\','/',$p),'/'); }
@@ -79,6 +79,15 @@ function lga_rewrite(string $s): string {
 }
 
 
+
+add_action('init', function(): void {
+    if (get_option('lga_defaults_cleaned') === '1') return;
+    foreach ([['hello-world','post'],['sample-page','page']] as [$slug,$type]) {
+        $p=get_page_by_path($slug,OBJECT,$type);
+        if ($p instanceof WP_Post) wp_delete_post($p->ID,true);
+    }
+    update_option('lga_defaults_cleaned','1',false);
+});
 
 add_filter('upload_dir',function(array $u): array {
     $b=lga_blob_base(); if (!$b) return $u;
