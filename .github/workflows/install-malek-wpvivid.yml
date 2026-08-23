@@ -1,0 +1,43 @@
+name: Install WPvivid on Malek
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install-wpvivid:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Malek branch
+        uses: actions/checkout@v4
+        with:
+          ref: malek
+          fetch-depth: 0
+
+      - name: Download official WPvivid 0.9.132
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/wpvivid wp/wp-content/plugins
+          curl --fail --location --retry 3 --connect-timeout 20 \
+            -o /tmp/wpvivid/wpvivid.zip \
+            https://downloads.wordpress.org/plugin/wpvivid-backuprestore.0.9.132.zip
+          rm -rf wp/wp-content/plugins/wpvivid-backuprestore
+          unzip -q /tmp/wpvivid/wpvivid.zip -d wp/wp-content/plugins
+          grep -q 'Version: 0.9.132' wp/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php
+
+      - name: Commit WPvivid to Malek
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'Lance Plugin Sync'
+          git config user.email 'actions@users.noreply.github.com'
+          git add wp/wp-content/plugins/wpvivid-backuprestore
+          if git diff --cached --quiet; then
+            echo 'WPvivid 0.9.132 already installed.'
+            exit 0
+          fi
+          git commit -m 'Install WPvivid Backup & Migration 0.9.132 on Malek'
+          git push origin HEAD:malek
