@@ -54,6 +54,7 @@ class Config
 
         $this->vercelToken = $this->readFirst([
             'SERVERLESSWP_STREAM_VERCEL_TOKEN',
+            'MEDIA_BLOB_READ_WRITE_TOKEN',
             'BLOB_READ_WRITE_TOKEN',
         ]);
         if ($this->vercelToken === null && $requestOidcToken !== null && $requestOidcToken !== '') {
