@@ -16,17 +16,18 @@ jobs:
           ref: malek
           fetch-depth: 0
 
-      - name: Download official WPvivid 0.9.132
+      - name: Download and verify official WPvivid 0.9.132
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p /tmp/wpvivid wp/wp-content/plugins
           curl --fail --location --retry 3 --connect-timeout 20 \
             -o /tmp/wpvivid/wpvivid.zip \
-            https://downloads.wordpress.org/plugin/wpvivid-backuprestore.0.9.132.zip
+            https://downloads.wordpress.org/plugin/wpvivid-backuprestore.zip
           rm -rf wp/wp-content/plugins/wpvivid-backuprestore
           unzip -q /tmp/wpvivid/wpvivid.zip -d wp/wp-content/plugins
-          grep -q 'Version: 0.9.132' wp/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php
+          test -f wp/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php
+          grep -Eq '^ *\*? *Version: *0\.9\.132' wp/wp-content/plugins/wpvivid-backuprestore/wpvivid-backuprestore.php
 
       - name: Commit WPvivid to Malek
         shell: bash
