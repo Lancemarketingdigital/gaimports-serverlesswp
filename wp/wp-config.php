@@ -99,6 +99,9 @@ $table_prefix = isset($_ENV['TABLE_PREFIX']) ? $_ENV['TABLE_PREFIX'] : 'wp_';
  */
 define( 'WP_DEBUG', false );
 
+// Interface e painel WordPress em Português do Brasil.
+if (!defined('WPLANG')) { define('WPLANG', 'pt_BR'); }
+
 /* Add any custom values between this line and the "stop editing" line. */
 
 if (!isset($_ENV['SKIP_MYSQL_SSL'])) {

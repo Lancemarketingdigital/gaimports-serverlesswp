@@ -11,5 +11,8 @@
   },
   "engines": {
     "node": "22.x"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install-ptbr.mjs"
   }
 }
