@@ -1,0 +1,178 @@
+/* =============================================================================
+   TEMA FAST WEBX - TOC CSS (SUMÁRIO DE POSTS E PÁGINAS)
+   =============================================================================
+   Este arquivo contém os estilos específicos do Sumário (TOC) dinâmico do tema.
+   Carregado dinamicamente no front-end quando o recurso estiver ativado.
+============================================================================= */
+
+/* --- TOC Styles --- */
+.fwx-toc-container {
+    border-left: 4px solid var(--fwx-primary);
+    padding: 20px 10px 0px 5px;
+    margin: 30px 0;
+    border-radius: var(--fwx-rad-4);
+}
+
+.fwx-toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.fwx-toc-title {
+    font-size: 1.0rem;
+    font-weight: 700;
+}
+
+/* Botão de Collapse */
+.fwx-toc-toggle {
+    background: none;
+    border: var(--fwx-border);
+    border-radius: var(--fwx-rad-4);
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    font-size: 1.1em;
+    line-height: 1;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--fwx-transition);
+    padding: 0;
+    flex-shrink: 0;
+}
+
+html[data-theme='dark'] .fwx-toc-toggle {
+    border-color: var(--fwx-borderc-dark);
+}
+
+.fwx-toc-toggle:hover {
+    background: rgba(0, 0, 0, 0.07);
+    border-color: var(--fwx-primary);
+    color: var(--fwx-primary);
+}
+
+.fwx-toc-toggle[aria-expanded="false"] {
+    transform: rotate(-90deg);
+}
+
+/* Animação de collapse */
+.fwx-toc-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 1080px;
+    opacity: 1;
+}
+
+.fwx-toc-list.fwx-toc-collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
+.entry-content ul.fwx-toc-list {
+    padding: 0px 0px 10px 5px;
+    /*autor: adicionei 0 para não ter sobras*/
+    margin-bottom: 0;
+}
+
+.fwx-toc-list li {
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+    padding-bottom: 0px;
+}
+
+/*criador: alteri detalhes de bordas, transição e ativo*/
+.fwx-toc-list a {
+    color: var(--fwx-text-color);
+    text-decoration: none;
+    font-weight: 400;
+    border-bottom: transparent;
+    line-height: 1.3rem;
+}
+
+.fwx-toc-list a:hover {
+    color: var(--fwx-secondary);
+    border-bottom: 1.5px solid rgba(var(--fwx-primary-rgb), 0.5);
+    transition: var(--fwx-transition);
+}
+
+.fwx-toc-list li.fwx-toc-active a {
+    color: var(--fwx-link-color);
+    font-weight: 700;
+    border-bottom: 1.5px solid rgba(var(--fwx-primary-rgb), 0.5);
+    padding-bottom: 0px;
+    line-height: 1.3rem;
+}
+
+.fwx-toc-list li.fwx-toc-active a:hover {
+    color: var(--fwx-secondary);
+    transition: var(--fwx-transition);
+}
+
+/* Fix para o título não ficar atrás do header fixo ao clicar no TOC */
+.fwx-actual-content h2[id] {
+    scroll-margin-top: 100px;
+}
+
+/* Sticky TOC Layout (Flutuando Fora do Conteúdo - Desktop) */
+@media (min-width: 1250px) {
+    .fwx-content-with-toc {
+        position: relative;
+        display: block;
+    }
+
+    .fwx-sticky-toc {
+        position: absolute;
+        top: 0;
+        /* Alinhamento inviolável: prende a direita do sumário à esquerda do post */
+        right: 100%;
+        margin-right: 20px;
+        /* Distância de 20px exatos do texto, nunca sobrepõe */
+        width: 240px;
+        /* Ligeiramente mais fino para caber em 1366px */
+        height: 100%;
+        pointer-events: none;
+        z-index: 10;
+    }
+
+    .fwx-sticky-toc .fwx-toc-container {
+        position: sticky;
+        top: 110px;
+        margin-top: 0;
+        pointer-events: auto;
+        max-height: calc(100vh - 150px);
+        overflow-y: auto;
+        scrollbar-width: thin;
+    }
+}
+
+/* --- Correção Estética do TOC Flutuante para Notebooks (1250px a 1640px) --- */
+@media (min-width: 1250px) and (max-width: 1640px) {
+
+    /* 1. Desloca o bloco do post (com sidebar) levemente para a direita e aplica recuo de 100px para empurrar o TOC apenas se ele estiver ativo e flutuando */
+    .fwx-single-layout.has-sidebar:has(.fwx-content-with-toc) {
+        max-width: 1070px !important;
+        transform: translateX(60px);
+        padding-left: 110px !important;
+        padding-right: 0 !important;
+        gap: 25px !important;
+        /* Recupera 15px de espaço interno reduzindo o gap do grid */
+    }
+
+    /* 2. Reduz suavemente a largura máxima do conteúdo de 660px para 610px para evitar o esmagamento do grid apenas se o TOC estiver ativo e flutuando */
+    .fwx-single-layout.has-sidebar:has(.fwx-content-with-toc) .fwx-single-content {
+        max-width: 620px !important;
+        /* Evita o estouro horizontal com o padding-left de 100px */
+    }
+
+    /* 3. Ajusta o gap do TOC de 20px para 15px para otimizar a flutuação lateral */
+    .fwx-sticky-toc {
+        margin-right: 15px !important;
+    }
+}

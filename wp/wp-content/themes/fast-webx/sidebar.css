@@ -1,0 +1,377 @@
+/*
+=============================================================================
+   MÓDULO SIDEBAR & WIDGETS
+   
+   Este arquivo contém os estilos específicos da barra lateral (sidebar) e
+   seus widgets correspondentes.
+   Carregado dinamicamente apenas quando a barra lateral ou seus shortcodes 
+   estiverem ativos no front-end.
+=============================================================================
+*/
+
+/* --- Sidebar Widgets Global (Boxed Style) --- */
+.fwx-sidebar .widget {
+    margin-bottom: 30px;
+    background: #fdfdfd;
+    /*var(--fwx-bg-color);*/
+    border: var(--fwx-border);
+    border-radius: var(--fwx-rad-8);
+    padding: 14px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+html[data-theme='dark'] .fwx-sidebar .widget {
+    /*18/06*/
+    border-color: var(--fwx-borderc-dark);
+    background: var(--fwx-bg-color-dark);
+}
+
+.fwx-sidebar .widget-title {
+    font-size: 1.1rem;
+    /*font-weight: 700;*/
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--fwx-primary);
+    display: block;
+    color: var(--fwx-text-color);
+}
+
+/* Garante que imagens de widgets NATIVOS do WP ocupem a largura correta sem afetar os customizados */
+.fwx-sidebar .widget>img,
+.fwx-sidebar .widget>a>img,
+.fwx-sidebar .widget_media_image img,
+.fwx-sidebar .widget .wp-block-image img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--fwx-rad-4);
+    display: block;
+}
+
+/* Padronização de botões nos widgets da sidebar */
+/*.fwx-sidebar .widget button,
+.fwx-sidebar .widget .button,
+.fwx-sidebar .widget .wp-block-button__link {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background: var(--fwx-primary);
+    color: var(--fwx-cat-text-color, #ffffff) !important;
+    border: none;
+    border-radius: var(--fwx-rad-4);
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--fwx-transition);
+    font-size: 1rem;
+    box-sizing: border-box;
+    text-decoration: none;
+}*/
+
+/*.fwx-sidebar .widget button:hover,
+.fwx-sidebar .widget .button:hover,
+.fwx-sidebar .widget .wp-block-button__link:hover {
+    background: var(--fwx-secondary);
+    transform: translateY(-2px);
+    color: var(--fwx-cat-text-color, #ffffff) !important;
+}*/
+
+/* --- Sidebar Author Widget (E-E-A-T) --- */
+/*.widget já tem 30px e é suficiente*/
+/*.fwx-sidebar-author {    margin-bottom: 30px;}*/
+
+.fwx-sidebar-author-inner {
+    text-align: center;
+}
+
+.fwx-sidebar .fwx-sidebar-author-avatar img {
+    border-radius: var(--fwx-rad-100) !important;
+    width: 96px !important;
+    height: 96px !important;
+    margin: 0 auto 15px;
+    object-fit: cover;
+    border: 2px solid var(--fwx-primary);
+    padding: 2px;
+    /*display: block;*/
+}
+
+.fwx-sidebar-author-name {
+    font-size: 1.25em;
+    margin: 10px 0;
+}
+
+/*.fwx-sidebar-author-bio {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}*/
+
+
+/*todos botões widget de sidebar*/
+.fwx-sidebar .fwx-sidebar-btn-author,
+.fwx-sidebar .widget button,
+.fwx-sidebar .widget .wp-block-button__link {
+    padding: 10px 20px;
+    font-size: 0.9em;
+}
+
+
+.fwx-sidebar-btn-author {
+    /*display: inline-block;*/
+    /*padding: 10px 20px;*/
+    /*background: var(--fwx-primary);*/
+    /*color: var(--fwx-cat-text-color, #ffffff);*/
+    /*text-decoration: none;*/
+    /*border-radius: var(--fwx-rad-4);*/
+    /*font-weight: 700;*/
+    /*font-size: 0.9em;*/
+    /*transition: var(--fwx-transition);*/
+}
+
+.fwx-sidebar-btn-author:hover {
+    /*background: var(--fwx-secondary);*/
+    /*color: var(--fwx-cat-text-color, #ffffff);*/
+}
+
+html[data-theme='dark'] .fwx-sidebar-author-inner .fwx-author-socials {
+    border-color: var(--fwx-borderc-dark);
+}
+
+/* --- Lead Form (Reset de margens na Sidebar) --- */
+.fwx-sidebar .fwx-lead-wrapper {
+    margin: 0;
+    padding: 0;
+    background: none;
+    border: none;
+}
+
+.fwx-sidebar .fwx-input-group {
+    flex-direction: column;
+}
+
+.fwx-sidebar .fwx-input-group button {
+    padding: 12px;
+}
+
+.fwx-sidebar-lead .fwx-lead-form-box {
+    padding: 0;
+    margin-bottom: 0;
+    border: none;
+    background: none;
+    box-shadow: none;
+}
+
+html[data-theme='dark'] .fwx-sidebar-lead .fwx-lead-form-box {
+    border: none;
+    background: none;
+}
+
+.fwx-sidebar-lead .fwx-lead-title,
+.fwx-sidebar-lead h2.fwx-lead-title {
+    font-size: 1.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+/* --- Posts Relacionados na Sidebar (Horizontal) --- */
+/*.widget já tem 30px e é suficiente*/
+/*.fwx-sidebar-related {     margin-bottom: 30px;}*/
+
+.fwx-sidebar-rel-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 14px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme='dark'] .fwx-sidebar-rel-item {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.fwx-sidebar-rel-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.fwx-sidebar-rel-thumb {
+    flex-shrink: 0;
+    width: 70px;
+    height: 90px;
+    overflow: hidden;
+    border-radius: var(--fwx-rad-4);
+    display: block;
+}
+
+.fwx-sidebar .fwx-sidebar-rel-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: var(--fwx-rad-4);
+}
+
+.fwx-sidebar-rel-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.fwx-sidebar-rel-title {
+    font-size: 0.85rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.fwx-sidebar-rel-title a {
+    color: var(--fwx-text-color);
+    text-decoration: none;
+    font-weight: 400;
+}
+
+.fwx-sidebar-rel-title a:hover {
+    color: var(--fwx-secondary);
+}
+
+/* --- Widget de Categorias da Sidebar --- */
+.fwx-sidebar-categories-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/*.fwx-sidebar-cat-btn {
+    /*display: flex;*/
+/*align-items: center;*/
+/*justify-content: center;*/
+/*padding: 16px 20px;*/
+/*border-radius: var(--fwx-rad-12);*/
+/*color: #ffffff !important;*/
+/*font-size: 1.1rem;*/
+/*font-weight: 700;*/
+/*text-align: center;*/
+/*transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;*/
+/*box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);*/
+/*border: none; }*/
+
+/*.fwx-sidebar-cat-btn:hover {
+    filter: brightness(1.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.12);
+    color: #ffffff !important;
+}*/
+
+.fwx-sidebar-cat-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Responsividade da Sidebar --- */
+@media (max-width: 768px) {
+    .fwx-mobile-hide-sidebar aside.fwx-sidebar {
+        display: none !important;
+    }
+}
+
+/* --- Estilos de Suporte a Widgets na Sidebar (Evitam Enfileiramento de CSS Pesados) --- */
+.fwx-sidebar .fwx-produto-cat {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--fwx-primary);
+    text-decoration: none;
+    transition: var(--fwx-transition);
+    display: inline-block;
+}
+
+.fwx-sidebar .fwx-produto-cat:hover {
+    color: var(--fwx-secondary);
+}
+
+.fwx-sidebar .fwx-produto-preco {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--fwx-primary);
+    margin-top: 3px;
+}
+
+.fwx-sidebar .fwx-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.66rem;
+    color: var(--fwx-text-color);
+    opacity: 0.8;
+    margin-top: 2px;
+    padding: 0;
+}
+
+.fwx-sidebar .fwx-meta-author {
+    display: inline-flex;
+    align-items: center;
+}
+
+.fwx-sidebar .fwx-meta-author::after {
+    content: "•";
+    margin-left: 6px;
+    opacity: 0.5;
+}
+
+html[data-theme='dark'] .fwx-sidebar .fwx-post-meta {
+    color: var(--fwx-text-color);
+}
+
+/* --- Estilos Adicionados do Blog (Modularidade da Sidebar) --- */
+.fwx-sidebar-author-avatar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: -10px;
+}
+
+.entry-content .fwx-sidebar-author-avatar {
+    margin-bottom: -50px;
+}
+
+/*.fwx-sidebar-author-avatar img {
+    border-radius: var(--fwx-rad-100) !important;
+    width: 96px !important;
+    height: 96px !important;
+    object-fit: cover;
+    border: 2px solid var(--fwx-primary);
+    padding: 2px;
+    display: block;
+    margin: 0 auto 15px;
+}*/
+
+.entry-content .fwx-sidebar-rel-thumb img,
+.fwx-sidebar-rel-thumb img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: var(--fwx-rad-4);
+    display: block !important;
+}
+
+.entry-content .fwx-sidebar-rel-info h4 {
+    margin-top: 0px;
+    font-size: 1rem;
+}
+
+.entry-content .fwx-sidebar-related {
+    max-width: 100%;
+}
+
+.entry-content .fwx-related-posts {
+    margin-top: 30px;
+}
+
+.entry-content .fwx-related-item {
+    margin: 0;
+}
+
+.entry-content .fwx-related-post-title {
+    margin: 10px 0;
+    font-size: 1rem;
+}

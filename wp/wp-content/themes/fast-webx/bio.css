@@ -1,0 +1,93 @@
+/*
+=============================================================================
+   MÓDULO LINK IN BIO (Shortcode [fwx_link_in_bio])
+   
+   Este arquivo contém os estilos específicos da página de Bio / Autor do tema.
+   As bases globais de estilos (tipografia base, resets globais e botões primários)
+   são herdadas diretamente do style.css para evitar duplicações desnecessárias.
+=============================================================================
+*/
+
+.fwx-link-tree-header {
+    margin: 0 0 30px 0;
+}
+
+.fwx-link-tree-wrapper {
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: center;
+    /*padding: 20px;*/
+}
+
+.fwx-link-tree-avatar img {
+    /*border-radius: var(--fwx-rad-100);*/
+    border: 3px solid var(--fwx-primary);
+    padding: 3px;
+    /*object-fit: cover;*/
+    width: 120px;
+    height: 120px;
+    display: inline-block;
+}
+
+h2.fwx-link-tree-name {
+    font-size: 1.5em;
+    margin: 15px 0 5px 0;
+}
+
+/*classe obsoleta - criador comentou*/
+/*.fwx-link-tree-bio {/*color: var(--fwx-text-color);}*/
+
+p.fwx-link-tree-bio {
+    margin-bottom: 0;
+    opacity: 0.8;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.fwx-link-tree-wrapper .fwx-link-tree-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    /*//////////MUITO CÓDIGO DESNECESSÁRIO, POR ISSO COMENTEI!//////////*/
+    /*font-size: 1.155rem;*/
+    /*padding: 16px 30px;*/
+    /*background: var(--fwx-primary);*/
+    /*color: var(--fwx-cat-text-color, #ffffff);*/
+    /*border-radius: var(--fwx-rad-8);*/
+    /*font-weight: 700;*/
+    /*text-decoration: none;*/
+    /*transition: var(--fwx-transition);*/
+    /*cursor: pointer;*/
+    /*border: none;*/
+    /*box-sizing: border-box;*/
+    /*text-align: center;*/
+}
+
+.fwx-link-tree-wrapper .fwx-link-tree-btn:hover {
+    /*//////////Já carrega do css padrão!//////////*/
+    /*background: var(--fwx-secondary);*/
+    /*color: var(--fwx-cat-text-color, #ffffff) !important;*/
+    /*transform: translateY(-2px);*/
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+}
+
+/* Destaque: Regra ativa para inverter o padrão Master na Bio */
+.fwx-link-tree-wrapper .fwx-link-tree-btn.fwx-link-tree-highlight {
+    background: var(--fwx-secondary);
+    background-image: linear-gradient(rgba(80, 3, 3, 0.3), rgba(47, 1, 33, 0.3));
+}
+
+.fwx-link-tree-wrapper .fwx-link-tree-btn.fwx-link-tree-highlight:hover {
+    /*//////////Já carrega do css padrão!//////////*/
+    /*background-color: var(--fwx-secondary) !important;*/
+    background-image: linear-gradient(var(--fwx-secondary), var(--fwx-secondary));
+}
+
+.fwx-link-tree-footer {
+    margin-top: 40px;
+    opacity: 0.75;
+    font-size: 0.8em;
+    /*letter-spacing: 0.5px;*/
+}
+
+/*CONSOLIDADO PELO CRIADOR MANUALMENTE EM 16/06/2026*/

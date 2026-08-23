@@ -1,0 +1,160 @@
+/* --- Anúncios (Ads Manager) --- */
+.fwx-auto-ad-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 40px auto;
+    display: block;
+    clear: both;
+    text-align: center;
+    /* hidden Impede vazamento de ads */
+    overflow: hidden;
+}
+
+.fwx-top-ad {
+    margin-top: 0;
+}
+
+.fwx-auto-ad-container>* {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    max-width: 100% !important;
+}
+
+/* Força Google Adsense e similares a respeitarem o container */
+.fwx-auto-ad-container ins,
+.fwx-auto-ad-container iframe,
+.fwx-auto-ad-container img {
+    display: block !important;
+    max-width: 100% !important;
+    width: auto;
+    overflow: hidden !important;
+}
+
+/* --- Proteção Global: Google AdSense --- */
+/* O atributo data-full-width-responsive="true" faz o Google aplicar */
+/* margin-left negativo e width:100vw, quebrando o layout inteiro. */
+/* Essas regras anulam esse comportamento em QUALQUER ins.adsbygoogle. */
+ins.adsbygoogle {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+}
+
+/* Iframes e divs internas do Google Ads */
+ins.adsbygoogle iframe,
+ins.adsbygoogle>div,
+ins.adsbygoogle>div>iframe {
+    max-width: 100% !important;
+    overflow: hidden !important;
+}
+
+/* Container dos anúncios do tema - isolamento completo */
+.fwx-auto-ad-container {
+    contain: content;
+    /* Cria barreira de isolamento CSS */
+}
+
+/* css para ads divs titulo, txt e div-fundo-bord*/
+.fwx-auto-ad-container .fwx-div {
+    border: var(--fwx-border);
+    background: var(--fwx-bg-color);
+    border-radius: var(--fwx-rad-8);
+    padding: 20px;
+    background: #fdfdfd;
+    text-align: left;
+}
+
+html[data-theme='dark'] .fwx-auto-ad-container .fwx-div {
+    border-color: var(--fwx-borderc-dark);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.fwx-auto-ad-container .fwx-t2 {
+    font-size: 1.8rem;
+    line-height: 1.8rem;
+    font-weight: 700;
+    margin: 10px 0 0 0;
+}
+
+.fwx-auto-ad-container .fwx-div-txt {
+    color: var(--fwx-text-color);
+    line-height: 1.4rem;
+    font-size: 1.1rem;
+    margin: 15px 0 10px 0;
+}
+
+.fwx-auto-ad-container .fwx-btn-ad {
+    /*margin: 10px 0;*/
+    width: max-content;
+    /*display: block;*/
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*background-color: var(--fwx-primary);*/
+    /*color: var(--fwx-cat-text-color, #ffffff) !important;*/
+    /*padding: 10px 16px;*/
+    /*border-radius: var(--fwx-rad-8);*/
+    font-size: 14px;
+    line-height: 1;
+    /*transition: var(--fwx-transition);*/
+    /*white-space: nowrap;*/
+}
+
+/*.fwx-auto-ad-container .fwx-btn-ad:hover {
+    background-color: var(--fwx-secondary);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}*/
+
+
+/* IA GEMINI PARA ADS: Layout do ADS (Lado a Lado no Desktop, Empilha no Mobile) */
+.fwx-auto-ad-container .fwx-ad-layout {
+    display: flex;
+    gap: 20px;
+    align-items: stretch;
+}
+
+.fwx-auto-ad-container .fwx-ad-img {
+    width: 30%;
+    flex-shrink: 0;
+}
+
+.fwx-auto-ad-container .fwx-ad-content {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+}
+
+/* Regra para Mobile (Telas menores que 768px) */
+@media (max-width: 768px) {
+    .fwx-auto-ad-container .fwx-div {
+        text-align: center !important;
+    }
+
+    .fwx-auto-ad-container .fwx-ad-layout {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .fwx-auto-ad-container .fwx-ad-img,
+    .fwx-auto-ad-container .fwx-ad-content {
+        width: 100%;
+        text-align: center;
+    }
+
+    .fwx-auto-ad-container .fwx-ad-img img {
+        height: 200px;
+        text-align: center;
+        /* Nota: img não aceita text-align, mas não atrapalha ter aqui */
+    }
+
+    /* 👇 ESTA É A MÁGICA PARA O BOTÃO 👇 */
+    .fwx-auto-ad-container .fwx-btn-ad {
+        margin: 10px auto;
+        /* O 'auto' centraliza o bloco na tela*/
+    }
+}

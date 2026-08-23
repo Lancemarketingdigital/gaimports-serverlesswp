@@ -1,0 +1,673 @@
+/* =============================================================================
+   TEMA FAST WEBX - BLOG CSS (MÓDULO DE BLOG E LISTAGENS)
+   =============================================================================
+   Este arquivo contém todos os estilos específicos das listagens de arquivo, 
+   página de posts (home), layouts de post singular, caixas de biografia de autor,
+   posts relacionados, paginação do blog, tags e estilos de erro 404.
+   
+   Carregado dinamicamente para otimização de renderização (Zero Bloat).
+============================================================================= */
+
+/* Os estilos estruturais de grid (.fwx-archive-layout) foram unificados no style.css base */
+
+
+/* --- Grid Base de Cards (Padrão Layout B) --- */
+.fwx-posts-grid {
+    display: grid;
+    gap: 30px;
+    margin-top: 40px;
+    width: 100%;
+    overflow-x: clip;
+    /*18/06*/
+    padding-right: 20px;
+}
+
+.fwx-archive-layout.has-sidebar .fwx-posts-grid {
+    margin-top: 0;
+}
+
+.fwx-grid-layout-b {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+}
+
+/*18/06 testar colocar nos cards*/
+/*.fwx-post-item {
+    border: var(--fwx-border);
+    border-radius: var(--fwx-rad-12);
+    overflow: hidden;
+    background: #fdfdfd;
+    transition: var(--fwx-transition);
+}*/
+
+/*18/06*/
+/*html[data-theme="dark"] .fwx-post-item {
+    border: var(--fwx-border-dark);
+    background-color: var(--fwx-bg-color-dark);
+}*/
+
+/*18/06 testar colocar nos cards*/
+/*.fwx-post-item:hover {
+    transform: translateY(-5px);*/
+/*18/06*/
+/*box-shadow: 12px 15px 20px -12px rgba(0, 0, 0, 0.08);
+}*/
+
+.fwx-post-thumb {
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.fwx-post-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+    aspect-ratio: 3 / 2;
+}
+
+.fwx-post-content {
+    padding: 20px;
+}
+
+
+
+/* O .fwx-cat-label foi migrado para o style.css base por ser um elemento visual global */
+
+
+/* --- Metadados nos Loops e Sidebar (Autor e Data) --- */
+.fwx-post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.7rem;
+    color: var(--fwx-text-color);
+    opacity: 0.8;
+}
+
+.fwx-meta-author::after {
+    content: "•";
+    margin-left: 10px;
+    opacity: 0.5;
+}
+
+.fwx-news-overlay .fwx-post-meta {
+    color: #fff;
+    margin-top: 5px;
+}
+
+.fwx-sidebar-rel-info .fwx-post-meta,
+.fwx-related-item .fwx-post-meta {
+    margin-top: 2px;
+}
+
+.fwx-related-item .fwx-post-meta {
+    padding: 0 14px 14px 14px;
+    font-size: 0.66rem;
+}
+
+.fwx-sidebar-rel-info .fwx-post-meta {
+    gap: 6px;
+}
+
+.fwx-news-block-side-item .fwx-post-meta,
+.fwx-news-list-item .fwx-post-meta {
+    margin-top: 5px;
+}
+
+/*
+=============================================================================
+   Aviso: O CSS do Hero do Blog/Páginas (.fwx-blog-hero e filhos)
+   foi migrado para o style.css base por ser um elemento visual global.
+=============================================================================
+*/
+
+/* --- Paginação (AJAX Load More) --- */
+/*.fwx-load-more-wrapper {
+    text-align: center;
+    margin: 50px 0 20px;
+    grid-column: 1 / -1;
+}*/
+
+/*.fwx-btn-load-more {
+    background: var(--fwx-primary);
+    color: var(--fwx-cat-text-color, #ffffff);
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1rem;*/
+/*font-weight: 700;*/
+/*border-radius: var(--fwx-rad-8);
+    cursor: pointer;
+    transition: var(--fwx-transition);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}*/
+
+/*.fwx-btn-load-more:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    box-shadow: none;
+}*/
+
+/*.fwx-btn-load-more:hover:not(:disabled) {
+    background: var(--fwx-secondary);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+}*/
+
+/* Os estilos estruturais de grid (.fwx-single-layout) foram unificados no style.css base */
+
+
+.fwx-single-header-2 {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    padding: 60px 20px 0;
+}
+
+.fwx-single-header-2 .fwx-cat-label {
+    margin-bottom: 10px;
+}
+
+.fwx-single-header-2 .entry-title {
+    font-size: 3rem;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.entry-excerpt {
+    font-style: italic;
+    opacity: 0.85;
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.fwx-single-header-2 .entry-meta {
+    justify-content: center;
+    display: flex;
+    gap: 15px;
+    text-transform: uppercase;
+}
+
+.fwx-hero-wide-thumb {
+    width: 100%;
+    max-width: 1110px;
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.fwx-hero-wide-thumb img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 3 / 2;
+    border-radius: var(--fwx-rad-8);
+    display: block;
+}
+
+.entry-meta {
+    font-size: 0.7em;
+    margin-bottom: 20px;
+}
+
+.fwx-hero-thumb {
+    margin-bottom: 30px;
+}
+
+@media (max-width: 768px) {
+    .fwx-single-header-2 {
+        padding: 40px 20px 0;
+        text-align: center !important;
+    }
+
+    .fwx-single-header-2 .entry-title {
+        font-size: 1.8rem;
+    }
+
+    .fwx-single-header-2 .fwx-cat-label {
+        font-size: 0.7em;
+    }
+
+    .fwx-single-layout .entry-content h2 {
+        font-size: 1.7rem;
+    }
+
+    .fwx-hero-wide-thumb {
+        width: 100%;
+        margin: 0 0 30px 0;
+        padding: 0;
+    }
+
+    .fwx-hero-wide-thumb img {
+        border-radius: 0;
+        aspect-ratio: 3 / 2;
+    }
+
+    .fwx-single-header-2 .entry-meta {
+        justify-content: center !important;
+        gap: 15px;
+    }
+
+    .fwx-grid-layout-c,
+    .fwx-archive-layout.has-sidebar .fwx-grid-layout-c,
+    .fwx-grid-layout-c .fwx-post-featured,
+    .fwx-archive-layout.has-sidebar .fwx-grid-layout-c .fwx-post-featured {
+        grid-template-columns: 1fr !important;
+    }
+
+    .fwx-grid-layout-c .fwx-post-featured .fwx-post-thumb,
+    .fwx-grid-layout-d .fwx-post-featured .fwx-post-thumb,
+    .fwx-archive-layout.has-sidebar .fwx-grid-layout-c .fwx-post-featured .fwx-post-thumb {
+        height: auto;
+        aspect-ratio: 3/2;
+    }
+
+    .fwx-posts-grid {
+        padding: 0;
+    }
+}
+
+/* --- Social Share & Author Box --- */
+.fwx-share-buttons {
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 15px;
+    flex-wrap: wrap;
+    text-align: left;
+}
+
+.fwx-share-title {
+    font-weight: 700;
+    margin-right: 5px;
+}
+
+.fwx-btn-share {
+    display: inline-block;
+    padding: 8px 16px;
+    margin-right: 10px;
+    border-radius: var(--fwx-rad-4);
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+.fwx-whatsapp {
+    background: #25D366;
+}
+
+.fwx-facebook {
+    background: #1877F2;
+}
+
+.fwx-twitter {
+    background: #000000;
+}
+
+.fwx-author-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: transparent;
+    padding: 0 20px 40px 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    margin-top: 60px;
+    margin-bottom: 50px;
+    position: relative;
+    background: #fdfdfd;
+}
+
+.fwx-author-avatar {
+    flex-shrink: 0;
+    width: 100px;
+    margin-top: -40px;
+    margin-bottom: 15px;
+    background: var(--fwx-bg-color);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.fwx-author-avatar img {
+    border-radius: var(--fwx-rad-100);
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.fwx-author-info {
+    max-width: 650px;
+}
+
+.fwx-author-name {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+.fwx-author-bio {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--fwx-text-color);
+    opacity: 0.8;
+    margin-bottom: 15px;
+}
+
+.fwx-author-link {
+    text-decoration: none;
+}
+
+.fwx-author-link:hover {
+    color: var(--fwx-secondary);
+    text-decoration: none;
+}
+
+.entry-content .fwx-author-box {
+    margin-top: 90px;
+    margin-bottom: 30px;
+}
+
+.entry-content .fwx-author-avatar {
+    margin: -30px 0;
+}
+
+
+/* --- Posts Relacionados --- */
+.fwx-related-posts {
+    margin: 40px 0;
+}
+
+html[data-theme='dark'] .fwx-related-posts {
+    border-top: none;
+}
+
+.fwx-related-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    margin-top: 0;
+}
+
+.fwx-related-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.fwx-related-item {
+    border: var(--fwx-border);
+    border-radius: var(--fwx-rad-8);
+    overflow: hidden;
+    /*18/06   */
+    background: #fdfdfd;
+    transition: var(--fwx-transition);
+}
+
+html[data-theme='dark'] .fwx-related-item {
+    border-color: var(--fwx-borderc-dark);
+    /*18/06*/
+    background: var(--fwx-bg-color-dark);
+}
+
+.fwx-related-item:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px);
+}
+
+.fwx-related-thumb img {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    display: block;
+    height: auto;
+}
+
+.fwx-related-post-title {
+    font-size: 0.95rem;
+    margin: 0;
+    padding: 14px;
+    line-height: 1.4;
+}
+
+.fwx-related-post-title a {
+    color: var(--fwx-text-color);
+    text-decoration: none;
+    transition: var(--fwx-transition);
+}
+
+.fwx-related-post-title a:hover {
+    color: var(--fwx-secondary);
+}
+
+@media (max-width: 768px) {
+    .fwx-related-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .fwx-related-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* --- Estilo de Tags do Post --- */
+.fwx-post-tags {
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+html[data-theme='dark'] .fwx-post-tags {
+    border: none;
+}
+
+.fwx-post-tags strong {
+    margin-right: 5px;
+}
+
+.fwx-post-tags a {
+    display: inline-block;
+    background: var(--fwx-primary);
+    color: var(--fwx-cat-text-color, #ffffff);
+    padding: 2px 8px;
+    border-radius: var(--fwx-rad-4);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: var(--fwx-transition);
+    transform: translateY(0);
+}
+
+.fwx-post-tags a:hover {
+    background: var(--fwx-secondary);
+    color: var(--fwx-cat-text-color, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Página 404 Personalizada --- */
+.fwx-404-wrapper {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.fwx-404-content {
+    max-width: 600px;
+    margin: 0 auto 80px;
+}
+
+.fwx-404-icon {
+    color: var(--fwx-primary);
+    margin-bottom: 30px;
+    opacity: 0.8;
+}
+
+.fwx-404-title {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+}
+
+.fwx-404-text {
+    font-size: 1.2rem;
+    color: var(--fwx-text-color);
+    opacity: 0.8;
+    margin-bottom: 40px;
+}
+
+.fwx-404-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* O botão .fwx-btn-404 foi migrado para o style.css base por ser um elemento visual global */
+
+
+.fwx-404-recent {
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+    padding-top: 60px;
+}
+
+html[data-theme='dark'] .fwx-404-recent {
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+.fwx-recent-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+@media (max-width: 768px) {
+    .fwx-404-wrapper {
+        padding: 60px 0;
+    }
+
+    .fwx-404-title {
+        font-size: 2.2rem;
+    }
+
+
+}
+
+/* Leitor de Áudio (TTS) Premium Player */
+/*.fwx-tts-wrapper {
+    margin-bottom: 25px;
+    width: 100%;
+}*/
+
+.fwx-tts-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #fdfdfd;
+    border: var(--fwx-border);
+    padding: 5px 10px;
+    margin-bottom: 25px;
+    border-radius: var(--fwx-rad-8);
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);*/
+    width: 100%;
+    box-sizing: border-box;
+}
+
+html[data-theme='dark'] .fwx-tts-player {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: var(--fwx-borderc-dark);
+}
+
+.fwx-tts-control {
+    /*background: var(--fwx-primary) !important;*/
+    /*color: #fff !important;*/
+    /*border: none !important;*/
+    width: 30px !important;
+    height: 30px !important;
+    /*min-width: 36px !important;*/
+    /*min-height: 36px !important;*/
+    border-radius: 50% !important;
+    /*display: flex !important;*/
+    /*align-items: center !important;*/
+    /*justify-content: center !important;*/
+    /*cursor: pointer !important;*/
+    /*transition: all 0.2s ease !important;*/
+    /*flex-shrink: 0 !important;*/
+    padding: 0 !important;
+    /*line-height: 0 !important;*/
+}
+
+/*.fwx-tts-control:hover {
+    /*transform: scale(1.05) !important;*/
+/*filter: brightness(1.1) !important;}*/
+
+
+.fwx-tts-control svg {
+    margin: 0 !important;
+    display: block !important;
+    width: 12px !important;
+    height: 12px !important;
+    fill: none !important;
+}
+
+/*.fwx-tts-stop {*/
+/*background: #747476 !important;*/
+/*color: #1f2937 !important;}*/
+
+/*html[data-theme='dark'] .fwx-tts-stop {*/
+/*background: rgba(255, 255, 255, 0.1) !important;*/
+/*color: #bbb !important;}*/
+
+/*.fwx-tts-stop:hover {
+    color: #1f2937 !important;
+    box-shadow: none !important;}*/
+
+/*html[data-theme='dark'] .fwx-tts-stop:hover {
+    background: rgba(255, 255, 255, 0.2) !important;
+    color: #fff !important;}*/
+
+.fwx-tts-progress-container {
+    flex-grow: 1;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+html[data-theme='dark'] .fwx-tts-progress-container {
+    background: var(--fwx-borderc-dark);
+}
+
+.fwx-tts-progress-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--fwx-primary);
+    border-radius: 4px;
+    transition: width 0.3s linear;
+}
+
+.fwx-tts-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--fwx-text-color, #666);
+    flex-shrink: 0;
+}
