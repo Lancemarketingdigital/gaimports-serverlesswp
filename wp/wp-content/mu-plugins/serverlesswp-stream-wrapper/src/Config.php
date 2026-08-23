@@ -54,6 +54,7 @@ class Config
 
         $this->vercelToken = $this->readFirst([
             'SERVERLESSWP_STREAM_VERCEL_TOKEN',
+            'MEDIA_READ_WRITE_TOKEN',
             'MEDIA_BLOB_READ_WRITE_TOKEN',
             'BLOB_READ_WRITE_TOKEN',
         ]);
@@ -64,6 +65,7 @@ class Config
 
         $this->vercelStoreId = $this->readFirst([
             'SERVERLESSWP_STREAM_VERCEL_STORE_ID',
+            'MEDIA_STORE_ID',
             'BLOB_STORE_ID',
             'SQLITE_BLOB_STORE_ID',
         ]);
