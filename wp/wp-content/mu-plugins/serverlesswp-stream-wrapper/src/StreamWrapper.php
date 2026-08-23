@@ -825,6 +825,16 @@ class StreamWrapper
         if (str_starts_with($path, 'file://')) {
             $path = substr($path, 7);
         }
+
+        // WordPress may pass wp-content paths relative to ABSPATH (for example
+        // wp-content/uploads/2026/08). Resolve those before routing so they
+        // are recognized as remote wp-content paths instead of falling back
+        // to Vercel's read-only deployment filesystem.
+        if (!str_starts_with($path, '/')) {
+            $base = defined('ABSPATH') ? (string) ABSPATH : (string) getcwd();
+            $path = rtrim($base, '/') . '/' . $path;
+        }
+
         return $this->resolveDots($path);
     }
 
