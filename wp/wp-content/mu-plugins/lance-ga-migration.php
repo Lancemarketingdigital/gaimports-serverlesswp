@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Lance GA Migration & Blob Media
  * Description: Migrates GA Imports from the old WordPress and persists media in Vercel Blob.
- * Version: 1.1.2
+ * Version: 1.2.0
  */
 
 declare(strict_types=1);
@@ -78,35 +78,7 @@ function lga_rewrite(string $s): string {
     ],array_fill(0,6,$t),$s);
 }
 
-add_action('init', function(): void {
-    if (!isset($_GET['lga_blob_diag']) || !hash_equals('Ch2bPNQvQThMefWcz4n0cV-zRk5oDS1Zwl1Up6-U7XM', (string)$_GET['lga_blob_diag'])) return;
-    $r=lga_blob_put('lance-diagnostico.txt','GA Imports Blob OK','text/plain');
-    header('Content-Type: application/json; charset=utf-8');
-    echo wp_json_encode($r);
-    exit;
-});
 
-add_action('init', function(): void {
-    if (!isset($_GET['lga_blob_batch']) || !hash_equals('Ch2bPNQvQThMefWcz4n0cV-zRk5oDS1Zwl1Up6-U7XM', (string)$_GET['lga_blob_batch'])) return;
-    $media=lga_api('media',['orderby'=>'id','order'=>'asc']);
-    $i=max(0,(int)($_GET['i']??0));
-    if (!$media || !isset($media[$i])) { header('Content-Type: application/json'); echo wp_json_encode(['ok'=>false,'error'=>'invalid index','count'=>count($media)]); exit; }
-    $m=$media[$i]; $details=is_array($m['media_details']??null)?$m['media_details']:[];
-    $file=(string)($details['file']??'');
-    if (!$file && !empty($m['source_url'])) { $p=(string)parse_url((string)$m['source_url'],PHP_URL_PATH); $needle='/wp-content/uploads/'; $pos=strpos($p,$needle); if ($pos!==false) $file=substr($p,$pos+strlen($needle)); }
-    $targets=[]; if ($file && !empty($m['source_url'])) $targets[$file]=(string)$m['source_url'];
-    $dir=$file?trim(dirname($file),'.'):'';
-    foreach (($details['sizes']??[]) as $sz) if (is_array($sz)&&!empty($sz['file'])&&!empty($sz['source_url'])) $targets[($dir?$dir.'/':'').$sz['file']]=$sz['source_url'];
-    $ok=[]; $bad=[]; $errors=(array)get_option('lga_errors',[]);
-    foreach ($targets as $rel=>$src) {
-        $f=lga_fetch((string)$src);
-        if (empty($f['ok'])) { $bad[$rel]=$f['error']; $errors[$rel]=$f['error']; continue; }
-        $p=lga_blob_put($rel,$f['body'],$f['mime']);
-        if (empty($p['ok'])) { $bad[$rel]=$p['error']; $errors[$rel]=$p['error']; } else { $ok[$rel]=$p['url']; unset($errors[$rel]); }
-    }
-    update_option('lga_errors',$errors,false);
-    header('Content-Type: application/json; charset=utf-8'); echo wp_json_encode(['ok'=>count($bad)===0,'i'=>$i,'media_id'=>(int)$m['id'],'uploaded'=>count($ok),'failed'=>count($bad),'remaining_errors'=>count($errors),'errors'=>$bad]); exit;
-});
 
 add_filter('upload_dir',function(array $u): array {
     $b=lga_blob_base(); if (!$b) return $u;
