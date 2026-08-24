@@ -49,8 +49,8 @@ function sqliteBlobConfig() {
     return {
         pathname: `${process.env['SQLITE_BLOB_PATHNAME'] || 'wp-sqlite'}${branchSlug()}.sqlite`,
         storeId: blobStoreId(),
-        // Never reuse an uploads-store token for the database.
-        token: process.env['SQLITE_BLOB_READ_WRITE_TOKEN'],
+        // Prefer a DB-specific token; fall back to the matching BLOB store token.
+        token: process.env['SQLITE_BLOB_READ_WRITE_TOKEN'] || process.env['BLOB_READ_WRITE_TOKEN'],
     };
 }
 
@@ -67,7 +67,7 @@ exports.resolve = function () {
         };
     }
 
-    if (has('VERCEL') && (has('SQLITE_BLOB_READ_WRITE_TOKEN') || !!blobStoreId())) {
+    if (has('VERCEL') && (has('SQLITE_BLOB_READ_WRITE_TOKEN') || has('BLOB_READ_WRITE_TOKEN') || !!blobStoreId())) {
         return {
             mode: 'sqlite-vercel-blob',
             plugin: require('./sqliteVercelBlob.js'),
